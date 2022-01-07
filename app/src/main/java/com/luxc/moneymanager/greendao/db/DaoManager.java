@@ -1,4 +1,4 @@
-package com.example.myapplication.greendao.db;
+package com.luxc.moneymanager.greendao.db;
 
 import android.content.Context;
 

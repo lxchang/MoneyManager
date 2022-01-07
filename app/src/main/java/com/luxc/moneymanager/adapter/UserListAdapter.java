@@ -1,11 +1,11 @@
-package com.example.myapplication.adapter;
+package com.luxc.moneymanager.adapter;
 
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.example.myapplication.R;
-import com.example.myapplication.entity.UserBean;
+import com.luxc.moneymanager.R;
+import com.luxc.moneymanager.entity.UserBean;
 
 public class UserListAdapter extends BaseQuickAdapter<UserBean, BaseViewHolder> {
     public UserListAdapter() {

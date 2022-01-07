@@ -1,6 +1,6 @@
-package com.example.myapplication.entity;
+package com.luxc.moneymanager.entity;
 
-import com.example.myapplication.entity.propertyconverter.BeanConverter;
+import com.luxc.moneymanager.entity.propertyconverter.BeanConverter;
 
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;

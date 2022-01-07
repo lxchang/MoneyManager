@@ -1,8 +1,10 @@
-package com.example.myapplication;
+package com.luxc.moneymanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.luxc.moneymanager.R;
 
 public class MainActivity extends AppCompatActivity {
 

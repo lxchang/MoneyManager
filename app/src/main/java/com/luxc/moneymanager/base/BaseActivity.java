@@ -1,4 +1,4 @@
-package com.example.myapplication.base;
+package com.luxc.moneymanager.base;
 
 import android.os.Bundle;
 

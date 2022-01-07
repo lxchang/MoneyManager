@@ -1,8 +1,7 @@
-package com.example.myapplication.entity.propertyconverter;
+package com.luxc.moneymanager.entity.propertyconverter;
 
-import com.example.myapplication.entity.UserBean;
+import com.luxc.moneymanager.entity.UserBean;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.greendao.converter.PropertyConverter;
 

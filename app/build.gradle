@@ -8,7 +8,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "com.luxc.moneymanager"
         minSdk 21
         targetSdk 31
         versionCode 1
@@ -31,7 +31,7 @@ android {
 
 greendao{
     schemaVersion 1
-    daoPackage 'com.example.myapplication.greendao.db'
+    daoPackage 'com.luxc.moneymanager.greendao.db'
     targetGenDir 'src/main/java'
 }
 

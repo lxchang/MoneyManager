@@ -1,4 +1,4 @@
-package com.example.myapplication.entity;
+package com.luxc.moneymanager.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
@@ -9,14 +9,15 @@ public class UserBean {
     @Id(autoincrement = true)
     private Long id;
     private String name;
-    private int age;
+    private String age;
     private String sex;
     private String birthday;
     // userType 用户类型 1：管理员  2；普通用户
     private int userType;
 
-    @Generated(hash = 2014424707)
-    public UserBean(Long id, String name, int age, String sex, String birthday,
+
+    @Generated(hash = 747468732)
+    public UserBean(Long id, String name, String age, String sex, String birthday,
             int userType) {
         this.id = id;
         this.name = name;
@@ -29,6 +30,7 @@ public class UserBean {
     @Generated(hash = 1203313951)
     public UserBean() {
     }
+    
 
     public int getUserType() {
         return userType;
@@ -54,11 +56,11 @@ public class UserBean {
         this.name = name;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 

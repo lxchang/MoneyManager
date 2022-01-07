@@ -1,10 +1,10 @@
-package com.example.myapplication.application;
+package com.luxc.moneymanager.application;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.myapplication.greendao.db.DaoMaster;
-import com.example.myapplication.greendao.db.DaoSession;
+import com.luxc.moneymanager.greendao.db.DaoMaster;
+import com.luxc.moneymanager.greendao.db.DaoSession;
 
 public class MyApp extends Application {
 
