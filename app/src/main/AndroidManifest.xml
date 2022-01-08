@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.luxc.moneymanager">
 
+    <!-- 访问电话状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 允许程序读取外部存储文件 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- 允许程序写入外部存储，如SD卡上写文件 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
@@ -15,13 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
 
-        </activity>
-        <activity
-            android:name=".activity.manager.UserManagerActivity"
+        <activity android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activity.manager.UserManagerActivity"
+            android:exported="true"/>
         <activity android:name=".activity.manager.AddNewUserAccountActivity" />
+        <activity android:name=".activity.LoginActivity" />
+
     </application>
 
 </manifest>
