@@ -54,6 +54,7 @@ public class FamilyManagerActivity extends BaseActivity {
                 intent.putExtra("bean", familyBean);
                 intent.putExtra("type", 1);
                 startActivity(intent);
+
             }
         });
     }
