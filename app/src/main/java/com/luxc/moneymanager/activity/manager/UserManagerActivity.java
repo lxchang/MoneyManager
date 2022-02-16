@@ -16,6 +16,7 @@ import com.luxc.moneymanager.greendao.db.UserBeanDao;
 import java.util.List;
 
 import com.luxc.moneymanager.R;
+import com.luxc.moneymanager.utils.DaoUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -41,10 +42,8 @@ public class UserManagerActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        UserBeanDao userBeanDao = MyApp.getInstance().getDaoSession().getUserBeanDao();
-        List<UserBean> list = userBeanDao.queryBuilder().list();
-        Log.e("luxc ", list.toString());
-        userListAdapter.setNewInstance(list);
+        Log.e("luxc",DaoUtils.queryAllUser().toString());
+        userListAdapter.setNewInstance(DaoUtils.queryAllUser());
     }
 
     @OnClick(R.id.add)

@@ -9,6 +9,7 @@ import com.luxc.moneymanager.R;
 import com.luxc.moneymanager.application.MyApp;
 import com.luxc.moneymanager.base.BaseActivity;
 import com.luxc.moneymanager.entity.UserBean;
+import com.luxc.moneymanager.utils.SharedPreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,20 +39,21 @@ public class AddNewUserAccountActivity extends BaseActivity {
     protected void initData() {
 
     }
+
     @OnClick(R.id.btn_add)
-    public void addNewUser(){
+    public void addNewUser() {
         UserBean userBean = new UserBean();
         String name = etName.getText().toString().trim();
         String age = etAge.getText().toString().trim();
         String sex = etSex.getText().toString().trim();
         String birthday = etBirthday.getText().toString().trim();
 
-        if (TextUtils.isEmpty(name)){
-            Toast.makeText(this,"请输入姓名",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(this, "请输入姓名", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(age)){
-            Toast.makeText(this,"请输入年龄",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(age)) {
+            Toast.makeText(this, "请输入年龄", Toast.LENGTH_SHORT).show();
             return;
         }
         userBean.setName(name);
@@ -59,10 +61,16 @@ public class AddNewUserAccountActivity extends BaseActivity {
         userBean.setAge(age);
         userBean.setSex(sex);
         userBean.setBirthday(birthday);
+        int userType = (int) SharedPreferenceUtils.get(AddNewUserAccountActivity.this, "currentUserType", 0);
+        if (userType == 0) {
+            userBean.setUserType(1);
+        } else if (userType == 1) {
+            userBean.setUserType(2);
+        }
 
         MyApp.getInstance().getDaoSession().insert(userBean);
 
-        Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
 
         setResult(RESULT_OK);
         finish();

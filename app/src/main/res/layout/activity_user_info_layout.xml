@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -19,16 +20,14 @@
             android:textColor="#333"
             android:textSize="14dp" />
 
-        <EditText
-            android:id="@+id/et_name"
+        <TextView
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="请输入姓名"
+            android:gravity="center_vertical|end"
             android:textColor="#333"
             android:textSize="14dp" />
     </LinearLayout>
@@ -48,16 +47,14 @@
             android:textColor="#333"
             android:textSize="14dp" />
 
-        <EditText
-            android:id="@+id/et_sex"
+        <TextView
+            android:id="@+id/tv_sex"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="请输入性别"
+            android:gravity="center_vertical|end"
             android:textColor="#333"
             android:textSize="14dp" />
     </LinearLayout>
@@ -77,17 +74,14 @@
             android:textColor="#333"
             android:textSize="14dp" />
 
-        <EditText
-            android:id="@+id/et_age"
+        <TextView
+            android:id="@+id/tv_age"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="请输入年龄"
-            android:inputType="number"
+            android:gravity="center_vertical|end"
             android:textColor="#333"
             android:textSize="14dp" />
     </LinearLayout>
@@ -107,30 +101,43 @@
             android:textColor="#333"
             android:textSize="14dp" />
 
-        <EditText
-            android:id="@+id/et_birthday"
+        <TextView
+            android:id="@+id/tv_birthday"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="请输入出生日期"
+            android:gravity="center_vertical|end"
+
             android:textColor="#333"
             android:textSize="14dp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/btn_add"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
-        android:background="#61a"
-        android:gravity="center"
-        android:text="确认"
-        android:textColor="@color/white"
-        android:textSize="18dp" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="88dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:text="所属家庭名称"
+            android:textColor="#333"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tv_family_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="center_vertical|end"
+            android:textColor="#333"
+            android:textSize="14dp" />
+    </LinearLayout>
 </LinearLayout>

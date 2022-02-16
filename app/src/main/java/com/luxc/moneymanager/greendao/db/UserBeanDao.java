@@ -30,6 +30,10 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
         public final static Property Sex = new Property(3, String.class, "sex", false, "SEX");
         public final static Property Birthday = new Property(4, String.class, "birthday", false, "BIRTHDAY");
         public final static Property UserType = new Property(5, int.class, "userType", false, "USER_TYPE");
+        public final static Property FamilyID = new Property(6, Long.class, "familyID", false, "FAMILY_ID");
+        public final static Property FamilyName = new Property(7, String.class, "familyName", false, "FAMILY_NAME");
+        public final static Property Password = new Property(8, String.class, "password", false, "PASSWORD");
+        public final static Property PhoneNum = new Property(9, String.class, "phoneNum", false, "PHONE_NUM");
     }
 
 
@@ -50,7 +54,11 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
                 "\"AGE\" TEXT," + // 2: age
                 "\"SEX\" TEXT," + // 3: sex
                 "\"BIRTHDAY\" TEXT," + // 4: birthday
-                "\"USER_TYPE\" INTEGER NOT NULL );"); // 5: userType
+                "\"USER_TYPE\" INTEGER NOT NULL ," + // 5: userType
+                "\"FAMILY_ID\" INTEGER," + // 6: familyID
+                "\"FAMILY_NAME\" TEXT," + // 7: familyName
+                "\"PASSWORD\" TEXT," + // 8: password
+                "\"PHONE_NUM\" TEXT);"); // 9: phoneNum
     }
 
     /** Drops the underlying database table. */
@@ -88,6 +96,26 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
             stmt.bindString(5, birthday);
         }
         stmt.bindLong(6, entity.getUserType());
+ 
+        Long familyID = entity.getFamilyID();
+        if (familyID != null) {
+            stmt.bindLong(7, familyID);
+        }
+ 
+        String familyName = entity.getFamilyName();
+        if (familyName != null) {
+            stmt.bindString(8, familyName);
+        }
+ 
+        String password = entity.getPassword();
+        if (password != null) {
+            stmt.bindString(9, password);
+        }
+ 
+        String phoneNum = entity.getPhoneNum();
+        if (phoneNum != null) {
+            stmt.bindString(10, phoneNum);
+        }
     }
 
     @Override
@@ -119,6 +147,26 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
             stmt.bindString(5, birthday);
         }
         stmt.bindLong(6, entity.getUserType());
+ 
+        Long familyID = entity.getFamilyID();
+        if (familyID != null) {
+            stmt.bindLong(7, familyID);
+        }
+ 
+        String familyName = entity.getFamilyName();
+        if (familyName != null) {
+            stmt.bindString(8, familyName);
+        }
+ 
+        String password = entity.getPassword();
+        if (password != null) {
+            stmt.bindString(9, password);
+        }
+ 
+        String phoneNum = entity.getPhoneNum();
+        if (phoneNum != null) {
+            stmt.bindString(10, phoneNum);
+        }
     }
 
     @Override
@@ -134,7 +182,11 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // age
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // sex
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // birthday
-            cursor.getInt(offset + 5) // userType
+            cursor.getInt(offset + 5), // userType
+            cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6), // familyID
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // familyName
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // password
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // phoneNum
         );
         return entity;
     }
@@ -147,6 +199,10 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
         entity.setSex(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setBirthday(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setUserType(cursor.getInt(offset + 5));
+        entity.setFamilyID(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
+        entity.setFamilyName(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setPassword(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setPhoneNum(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
      }
     
     @Override

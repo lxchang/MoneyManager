@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyApplication">
+        android:theme="@style/MyTheme">
 
         <activity android:name=".activity.SplashActivity"
             android:exported="true">
@@ -38,6 +38,9 @@
             android:exported="true"/>
         <activity android:name=".activity.manager.AddNewUserAccountActivity" />
         <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.manager.FamilyManagerActivity" />
+        <activity android:name=".activity.manager.AddFamilyActivity" />
+        <activity android:name=".activity.UserInfoActivity" />
 
     </application>
 

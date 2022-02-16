@@ -8,9 +8,11 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
+import com.luxc.moneymanager.entity.FamilyBean;
 import com.luxc.moneymanager.entity.UserBean;
 import com.luxc.moneymanager.entity.UserManager;
 
+import com.luxc.moneymanager.greendao.db.FamilyBeanDao;
 import com.luxc.moneymanager.greendao.db.UserBeanDao;
 import com.luxc.moneymanager.greendao.db.UserManagerDao;
 
@@ -23,9 +25,11 @@ import com.luxc.moneymanager.greendao.db.UserManagerDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig familyBeanDaoConfig;
     private final DaoConfig userBeanDaoConfig;
     private final DaoConfig userManagerDaoConfig;
 
+    private final FamilyBeanDao familyBeanDao;
     private final UserBeanDao userBeanDao;
     private final UserManagerDao userManagerDao;
 
@@ -33,22 +37,32 @@ public class DaoSession extends AbstractDaoSession {
             daoConfigMap) {
         super(db);
 
+        familyBeanDaoConfig = daoConfigMap.get(FamilyBeanDao.class).clone();
+        familyBeanDaoConfig.initIdentityScope(type);
+
         userBeanDaoConfig = daoConfigMap.get(UserBeanDao.class).clone();
         userBeanDaoConfig.initIdentityScope(type);
 
         userManagerDaoConfig = daoConfigMap.get(UserManagerDao.class).clone();
         userManagerDaoConfig.initIdentityScope(type);
 
+        familyBeanDao = new FamilyBeanDao(familyBeanDaoConfig, this);
         userBeanDao = new UserBeanDao(userBeanDaoConfig, this);
         userManagerDao = new UserManagerDao(userManagerDaoConfig, this);
 
+        registerDao(FamilyBean.class, familyBeanDao);
         registerDao(UserBean.class, userBeanDao);
         registerDao(UserManager.class, userManagerDao);
     }
     
     public void clear() {
+        familyBeanDaoConfig.clearIdentityScope();
         userBeanDaoConfig.clearIdentityScope();
         userManagerDaoConfig.clearIdentityScope();
+    }
+
+    public FamilyBeanDao getFamilyBeanDao() {
+        return familyBeanDao;
     }
 
     public UserBeanDao getUserBeanDao() {
