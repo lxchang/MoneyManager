@@ -2,7 +2,9 @@ package com.luxc.moneymanager.utils;
 
 import com.luxc.moneymanager.application.MyApp;
 import com.luxc.moneymanager.entity.FamilyBean;
+import com.luxc.moneymanager.entity.IncomePayRecordBean;
 import com.luxc.moneymanager.entity.UserBean;
+import com.luxc.moneymanager.greendao.db.IncomePayRecordBeanDao;
 import com.luxc.moneymanager.greendao.db.UserBeanDao;
 
 import java.util.List;
@@ -18,11 +20,29 @@ public class DaoUtils {
     }
 
     /**
+     * 查询某家庭成员
+     * @param userName
+     * @return
+     */
+    public static List<UserBean> queryByFamilyId(Long familyId){
+        return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().where(UserBeanDao.Properties.FamilyID.eq(familyId)).list();
+    }
+
+    /**
      * 查询所有用户
      * @return
      */
     public static List<UserBean> queryAllUser(){
         return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().list();
+    }
+
+    /**
+     * 通过userId 查询 收支记录
+     * @param userId
+     * @return
+     */
+    public static List<IncomePayRecordBean> queryRecordByUserId(Long userId){
+        return MyApp.getInstance().getDaoSession().getIncomePayRecordBeanDao().queryBuilder().where(IncomePayRecordBeanDao.Properties.UserId.eq(userId)).list();
     }
 
     /**

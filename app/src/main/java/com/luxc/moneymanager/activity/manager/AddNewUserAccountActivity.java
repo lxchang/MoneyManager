@@ -62,10 +62,14 @@ public class AddNewUserAccountActivity extends BaseActivity {
         userBean.setSex(sex);
         userBean.setBirthday(birthday);
         int userType = (int) SharedPreferenceUtils.get(AddNewUserAccountActivity.this, "currentUserType", 0);
+        Long familyId = (Long) SharedPreferenceUtils.get(AddNewUserAccountActivity.this, "currentUserFamilyId", 0L);
+        String familyName = (String) SharedPreferenceUtils.get(AddNewUserAccountActivity.this, "currentUserFamilyName", "");
         if (userType == 0) {
             userBean.setUserType(1);
         } else if (userType == 1) {
             userBean.setUserType(2);
+            userBean.setFamilyName(familyName);
+            userBean.setFamilyID(familyId);
         }
 
         MyApp.getInstance().getDaoSession().insert(userBean);

@@ -9,10 +9,12 @@ import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
 import com.luxc.moneymanager.entity.FamilyBean;
+import com.luxc.moneymanager.entity.IncomePayRecordBean;
 import com.luxc.moneymanager.entity.UserBean;
 import com.luxc.moneymanager.entity.UserManager;
 
 import com.luxc.moneymanager.greendao.db.FamilyBeanDao;
+import com.luxc.moneymanager.greendao.db.IncomePayRecordBeanDao;
 import com.luxc.moneymanager.greendao.db.UserBeanDao;
 import com.luxc.moneymanager.greendao.db.UserManagerDao;
 
@@ -26,10 +28,12 @@ import com.luxc.moneymanager.greendao.db.UserManagerDao;
 public class DaoSession extends AbstractDaoSession {
 
     private final DaoConfig familyBeanDaoConfig;
+    private final DaoConfig incomePayRecordBeanDaoConfig;
     private final DaoConfig userBeanDaoConfig;
     private final DaoConfig userManagerDaoConfig;
 
     private final FamilyBeanDao familyBeanDao;
+    private final IncomePayRecordBeanDao incomePayRecordBeanDao;
     private final UserBeanDao userBeanDao;
     private final UserManagerDao userManagerDao;
 
@@ -40,6 +44,9 @@ public class DaoSession extends AbstractDaoSession {
         familyBeanDaoConfig = daoConfigMap.get(FamilyBeanDao.class).clone();
         familyBeanDaoConfig.initIdentityScope(type);
 
+        incomePayRecordBeanDaoConfig = daoConfigMap.get(IncomePayRecordBeanDao.class).clone();
+        incomePayRecordBeanDaoConfig.initIdentityScope(type);
+
         userBeanDaoConfig = daoConfigMap.get(UserBeanDao.class).clone();
         userBeanDaoConfig.initIdentityScope(type);
 
@@ -47,22 +54,29 @@ public class DaoSession extends AbstractDaoSession {
         userManagerDaoConfig.initIdentityScope(type);
 
         familyBeanDao = new FamilyBeanDao(familyBeanDaoConfig, this);
+        incomePayRecordBeanDao = new IncomePayRecordBeanDao(incomePayRecordBeanDaoConfig, this);
         userBeanDao = new UserBeanDao(userBeanDaoConfig, this);
         userManagerDao = new UserManagerDao(userManagerDaoConfig, this);
 
         registerDao(FamilyBean.class, familyBeanDao);
+        registerDao(IncomePayRecordBean.class, incomePayRecordBeanDao);
         registerDao(UserBean.class, userBeanDao);
         registerDao(UserManager.class, userManagerDao);
     }
     
     public void clear() {
         familyBeanDaoConfig.clearIdentityScope();
+        incomePayRecordBeanDaoConfig.clearIdentityScope();
         userBeanDaoConfig.clearIdentityScope();
         userManagerDaoConfig.clearIdentityScope();
     }
 
     public FamilyBeanDao getFamilyBeanDao() {
         return familyBeanDao;
+    }
+
+    public IncomePayRecordBeanDao getIncomePayRecordBeanDao() {
+        return incomePayRecordBeanDao;
     }
 
     public UserBeanDao getUserBeanDao() {

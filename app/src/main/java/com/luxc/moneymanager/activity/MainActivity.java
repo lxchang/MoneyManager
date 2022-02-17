@@ -9,13 +9,16 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.luxc.moneymanager.activity.manager.FamilyManagerActivity;
 import com.luxc.moneymanager.activity.manager.UserManagerActivity;
+import com.luxc.moneymanager.utils.SharedPreferenceUtils;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
@@ -24,6 +27,9 @@ import com.luxc.moneymanager.R;
 import com.luxc.moneymanager.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {
+    @BindView(R.id.ll_manager_layout)
+    LinearLayout llManagerLayout;
+
     private static final String TAG = "MainActivity";
     private RxPermissions rxPermissions;
 
@@ -35,6 +41,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         MultPermission2();
+        int userType = (int) SharedPreferenceUtils.get(MainActivity.this, "currentUserType", 0);
+        llManagerLayout.setVisibility(userType != 2 ? View.VISIBLE : View.GONE);
+
     }
 
     @Override
@@ -51,11 +60,11 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.tv_in:
-                intent.setClass(this, UserManagerActivity.class);
+                intent.setClass(this, MyIncomeActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_out:
-                intent.setClass(this, UserManagerActivity.class);
+                intent.setClass(this, MyPayActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_family_user:

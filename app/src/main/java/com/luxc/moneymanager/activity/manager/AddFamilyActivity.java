@@ -82,6 +82,8 @@ public class AddFamilyActivity extends BaseActivity {
                 UserBean userBean = userBeans.get(0);
                 userBean.setFamilyID(familyBean.getFamilyId());
                 userBean.setFamilyName(familyBean.getFamilyName());
+                SharedPreferenceUtils.put(AddFamilyActivity.this,"currentUserFamilyId",familyBean.getFamilyId());
+                SharedPreferenceUtils.put(AddFamilyActivity.this,"currentUserFamilyName",familyBean.getFamilyName());
                 MyApp.getInstance().getDaoSession().update(userBean);
             }
             Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();

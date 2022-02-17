@@ -71,7 +71,8 @@ public class LoginActivity extends BaseActivity {
                     int userType = userBeans.get(0).getUserType();
                     Long userId = userBeans.get(0).getId();
                     Long familyID = userBeans.get(0).getFamilyID();
-                    login(account,userId,userType,familyID);
+                    String familyName = userBeans.get(0).getFamilyName();
+                    login(account,userId,userType,familyID,familyName);
                 } else {
                     if (account.equals("admin")) {
                         UserBean userBean = new UserBean();
@@ -81,7 +82,7 @@ public class LoginActivity extends BaseActivity {
                         userBean.setFamilyID(0L);
                         userBean.setUserType(0);
                         MyApp.getInstance().getDaoSession().insert(userBean);
-                        login("admin",0L,0,0L);
+                        login("admin",0L,0,0L,"");
                     } else {
                         Toast.makeText(LoginActivity.this, "没有该用户", Toast.LENGTH_SHORT).show();
                     }
@@ -91,7 +92,7 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    private void login(String account,Long userId,int userType,Long familyID){
+    private void login(String account,Long userId,int userType,Long familyID,String familyName){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -99,8 +100,10 @@ public class LoginActivity extends BaseActivity {
                 SharedPreferenceUtils.put(LoginActivity.this, "currentUser", account);
                 SharedPreferenceUtils.put(LoginActivity.this, "currentUserId", userId);
                 SharedPreferenceUtils.put(LoginActivity.this, "currentUserType", userType);
-                if (familyID!=null)
-                SharedPreferenceUtils.put(LoginActivity.this, "currentUserFamilyId", familyID);
+                if (familyID!=null) {
+                    SharedPreferenceUtils.put(LoginActivity.this, "currentUserFamilyId", familyID);
+                    SharedPreferenceUtils.put(LoginActivity.this, "currentUserFamilyName", familyName);
+                }
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             }

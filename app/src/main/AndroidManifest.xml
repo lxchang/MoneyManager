@@ -41,6 +41,9 @@
         <activity android:name=".activity.manager.FamilyManagerActivity" />
         <activity android:name=".activity.manager.AddFamilyActivity" />
         <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.manager.FamilyUserManagerActivity" />
+        <activity android:name=".activity.MyIncomeActivity" />
+        <activity android:name=".activity.MyPayActivity" />
 
     </application>
 

@@ -120,12 +120,12 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="88dp"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_marginStart="12dp"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:text="所属家庭名称"
+            android:text="我的家庭"
             android:textColor="#333"
             android:textSize="14dp" />
 
@@ -137,6 +137,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
             android:gravity="center_vertical|end"
+            android:hint="您还没有创建家庭，点击去创建～"
             android:textColor="#333"
             android:textSize="14dp" />
     </LinearLayout>

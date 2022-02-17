@@ -39,33 +39,42 @@
         android:textColor="#333"
         android:textSize="16dp" />
 
-    <TextView
-        android:id="@+id/tv_family_user"
+    <LinearLayout
+        android:id="@+id/ll_manager_layout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:text="家庭成员"
-        android:textColor="#333"
-        android:textSize="16dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_user_manager"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:text="人员管理"
-        android:textColor="#333"
-        android:textSize="16dp" />
+        <TextView
+            android:id="@+id/tv_family_user"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:text="家庭成员"
+            android:visibility="gone"
+            android:textColor="#333"
+            android:textSize="16dp" />
 
-    <TextView
-        android:id="@+id/tv_family_manager"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:text="家庭管理"
-        android:textColor="#333"
-        android:textSize="16dp" />
+        <TextView
+            android:id="@+id/tv_user_manager"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:text="人员管理"
+            android:textColor="#333"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_family_manager"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:text="家庭管理"
+            android:textColor="#333"
+            android:textSize="16dp" />
+
+    </LinearLayout>
 </LinearLayout>
