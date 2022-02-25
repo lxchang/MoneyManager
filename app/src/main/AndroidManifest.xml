@@ -44,6 +44,7 @@
         <activity android:name=".activity.manager.FamilyUserManagerActivity" />
         <activity android:name=".activity.MyIncomeActivity" />
         <activity android:name=".activity.MyPayActivity" />
+        <activity android:name=".activity.AddRecordActivity" />
 
     </application>
 

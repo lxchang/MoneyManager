@@ -44,7 +44,7 @@ public class MyIncomeActivity extends BaseActivity {
 
     @OnClick(R.id.add)
     public void onClick() {
-        Intent intent = new Intent(this, AddNewUserAccountActivity.class);
+        Intent intent = new Intent(this, AddRecordActivity.class);
         startActivityForResult(intent,ADD_NEW_USER_FLAG);
     }
 
