@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_head_view"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/toolbar_back"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_back" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxWidth="220dp"
+        android:maxLines="1"
+        android:textColor="#2F2F2F"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/ll_right"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_black_add" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sure"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:text="确定"
+        android:textSize="14dp"
+        android:visibility="gone" />
+</RelativeLayout>

@@ -3,33 +3,35 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <include layout="@layout/include_head_view_layout"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_family_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请输入家庭名称"
+            android:textColor="#333"
+            android:textSize="14dp" />
+
         <TextView
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:text="家庭名称"
-            android:textSize="14dp"
-            android:gravity="center_vertical"
             android:layout_marginStart="12dp"
             android:layout_marginTop="10dp"
-            android:textColor="#333"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/et_family_name"
-            android:background="@null"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="12dp"
             android:gravity="center_vertical"
-            android:hint="请输入家庭名称"
-            android:textSize="14dp"
-            android:textColor="#333"/>
+            android:text="家庭名称"
+            android:textColor="#333"
+            android:textSize="14dp" />
     </LinearLayout>
 
     <TextView
@@ -43,5 +45,5 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="10dp"
-        android:background="#61a"/>
+        android:background="@drawable/btn_bg"/>
 </LinearLayout>
