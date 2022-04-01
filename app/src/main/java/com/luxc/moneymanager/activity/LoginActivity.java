@@ -50,10 +50,14 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_forget_pwd, R.id.btn_login})
+    @OnClick({R.id.tv_forget_pwd, R.id.btn_login,R.id.tv_to_register})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.tv_forget_pwd:
+                break;
+            case R.id.tv_to_register:
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_login:
                 account = etAccount.getText().toString().trim();

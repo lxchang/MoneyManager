@@ -3,15 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/btn_bg.xml" value="0.168" />
+        <entry key="app/src/main/res/drawable/edit_bg.xml" value="0.168" />
         <entry key="app/src/main/res/layout/activity_add_family_layout.xml" value="0.3525834129933141" />
         <entry key="app/src/main/res/layout/activity_add_new_user_account_layout.xml" value="0.3220108695652174" />
         <entry key="app/src/main/res/layout/activity_add_record_layout.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/activity_family_user_manager_layout.xml" value="0.2776268115942029" />
-        <entry key="app/src/main/res/layout/activity_login_layout.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/layout/activity_login_layout.xml" value="0.3316521134216122" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29037628173828123" />
         <entry key="app/src/main/res/layout/activity_my_income_layout.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/activity_my_pay_layout.xml" value="0.2776268115942029" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.21331521739130435" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.31734185987903224" />
         <entry key="app/src/main/res/layout/activity_splash_layout.xml" value="0.3170289855072464" />
         <entry key="app/src/main/res/layout/activity_user_info_layout.xml" value="0.29528985507246375" />
         <entry key="app/src/main/res/layout/activity_user_manager_layout.xml" value="0.30510752688172044" />
