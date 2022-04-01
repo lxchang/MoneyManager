@@ -1,4 +1,4 @@
-package com.luxc.moneymanager.activity.manager;
+package com.luxc.moneymanager.activity;
 
 import android.os.Bundle;
 
