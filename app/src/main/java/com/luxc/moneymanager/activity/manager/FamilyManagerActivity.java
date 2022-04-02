@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,11 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.listener.OnItemLongClickListener;
 import com.luxc.moneymanager.R;
 import com.luxc.moneymanager.adapter.FamilyListAdapter;
 import com.luxc.moneymanager.adapter.UserListAdapter;
+import com.luxc.moneymanager.application.MyApp;
 import com.luxc.moneymanager.base.BaseActivity;
+import com.luxc.moneymanager.dialog.AbstractCommonDialog;
 import com.luxc.moneymanager.entity.FamilyBean;
+import com.luxc.moneymanager.entity.UserBean;
+import com.luxc.moneymanager.greendao.db.FamilyBeanDao;
 import com.luxc.moneymanager.utils.DaoUtils;
 import com.luxc.moneymanager.utils.SharedPreferenceUtils;
 
@@ -59,6 +65,36 @@ public class FamilyManagerActivity extends BaseActivity {
                 intent.putExtra("type", 1);
                 startActivity(intent);
 
+            }
+        });
+        familyListAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                FamilyBean familyBean = ((FamilyListAdapter) adapter).getData().get(position);
+
+                AbstractCommonDialog commonDialog = new AbstractCommonDialog(FamilyManagerActivity.this) {
+                    @Override
+                    public void sureClick() {
+                        List<UserBean> userBeans = DaoUtils.queryByFamilyId(familyBean.getFamilyId());
+                        for (UserBean userBean : userBeans) {
+                            userBean.setFamilyID(-1L);
+                            userBean.setFamilyName("");
+                            MyApp.getInstance().getDaoSession().getUserBeanDao().update(userBean);
+                        }
+
+                        MyApp.getInstance().getDaoSession().getFamilyBeanDao().deleteByKey(familyBean.getFamilyId());
+                        Toast.makeText(FamilyManagerActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
+                        initData();
+                    }
+
+                    @Override
+                    public void cancelClick() {
+
+                    }
+                };
+                commonDialog.setText("确认删除该家庭？","");
+                commonDialog.showDialog();
+                return false;
             }
         });
     }

@@ -50,10 +50,18 @@ public class MyIncomeActivity extends BaseActivity {
         incomePayAdapter.setNewInstance(DaoUtils.queryRecordByUserId(userId));
     }
 
-    @OnClick(R.id.ll_right)
-    public void onClick() {
-        Intent intent = new Intent(this, AddRecordActivity.class);
-        startActivityForResult(intent,ADD_NEW_USER_FLAG);
+    @OnClick({R.id.ll_right,R.id.ll_back})
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.ll_back:
+                finish();
+                break;
+            case R.id.ll_right:
+                Intent intent = new Intent(this, AddRecordActivity.class);
+                startActivityForResult(intent,ADD_NEW_USER_FLAG);
+                break;
+        }
+
     }
 
 

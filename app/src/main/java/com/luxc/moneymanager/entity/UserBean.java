@@ -13,7 +13,7 @@ public class UserBean {
     private String sex;
     private String birthday;
     // userType 用户类型 0 超级管理员 1：家庭管理员  2；普通用户（家庭成员）
-    private int userType;
+    private int userType=2;
     //对应所属家庭id
     private Long familyID;
     private String familyName;

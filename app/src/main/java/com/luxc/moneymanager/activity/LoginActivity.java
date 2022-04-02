@@ -14,7 +14,11 @@ import com.luxc.moneymanager.application.MyApp;
 import com.luxc.moneymanager.base.BaseActivity;
 import com.luxc.moneymanager.entity.UserBean;
 import com.luxc.moneymanager.utils.DaoUtils;
+import com.luxc.moneymanager.utils.LogUtils;
 import com.luxc.moneymanager.utils.SharedPreferenceUtils;
+import com.luxc.moneymanager.utils.ToastUtils;
+
+import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.List;
 
@@ -49,7 +53,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        List<UserBean> userBeans = DaoUtils.queryAllUser();
+        LogUtils.e(userBeans.toString());
     }
 
     @OnClick({R.id.ll_back,R.id.tv_forget_pwd, R.id.btn_login,R.id.tv_to_register})
@@ -68,7 +73,7 @@ public class LoginActivity extends BaseActivity {
                 account = etAccount.getText().toString().trim();
                 password = etPassword.getText().toString().trim();
                 if (TextUtils.isEmpty(account)) {
-                    Toast.makeText(LoginActivity.this, "请输入用户名", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "请输入账号", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
@@ -81,17 +86,24 @@ public class LoginActivity extends BaseActivity {
                     Long userId = userBeans.get(0).getId();
                     Long familyID = userBeans.get(0).getFamilyID();
                     String familyName = userBeans.get(0).getFamilyName();
-                    login(account,userId,userType,familyID,familyName);
+                    String pwd = userBeans.get(0).getPassword();
+                    if (!password.equals(pwd)){
+                        ToastUtils.showShort("您输入的密码不正确,请重新输入");
+                        etPassword.setText("");
+                        return;
+                    }
+                    login(account,pwd,userId,userType,familyID,familyName);
                 } else {
                     if (account.equals("admin")) {
                         UserBean userBean = new UserBean();
                         userBean.setName("admin");
-                        userBean.setPassword(password);
+                        userBean.setPhoneNum("admin");
+                        userBean.setPassword("123");
                         userBean.setId(0L);
                         userBean.setFamilyID(0L);
                         userBean.setUserType(0);
                         MyApp.getInstance().getDaoSession().insert(userBean);
-                        login("admin",0L,0,0L,"");
+                        login("admin","123",0L,0,0L,"");
                     } else {
                         Toast.makeText(LoginActivity.this, "没有该用户", Toast.LENGTH_SHORT).show();
                     }
@@ -101,7 +113,7 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    private void login(String account,Long userId,int userType,Long familyID,String familyName){
+    private void login(String account,String pwd,Long userId,int userType,Long familyID,String familyName){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

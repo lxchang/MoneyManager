@@ -11,17 +11,17 @@ import java.util.List;
 
 public class DaoUtils {
     /**
-     * 根据用户名称 查询用户信息
+     * 根据账号 查询用户信息
      * @param userName
      * @return
      */
     public static List<UserBean> queryByName(String userName){
-        return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().where(UserBeanDao.Properties.Name.eq(userName)).list();
+        return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().where(UserBeanDao.Properties.PhoneNum.eq(userName)).list();
     }
 
     /**
      * 查询某家庭成员
-     * @param userName
+     * @param familyId
      * @return
      */
     public static List<UserBean> queryByFamilyId(Long familyId){
