@@ -121,10 +121,10 @@ public class LoginActivity extends BaseActivity {
                 SharedPreferenceUtils.put(LoginActivity.this, "currentUser", account);
                 SharedPreferenceUtils.put(LoginActivity.this, "currentUserId", userId);
                 SharedPreferenceUtils.put(LoginActivity.this, "currentUserType", userType);
-                if (familyID!=null) {
-                    SharedPreferenceUtils.put(LoginActivity.this, "currentUserFamilyId", familyID);
-                    SharedPreferenceUtils.put(LoginActivity.this, "currentUserFamilyName", familyName);
-                }
+//                if (familyID!=null) {
+//                    SharedPreferenceUtils.put(LoginActivity.this, "currentUserFamilyId", familyID);
+//                    SharedPreferenceUtils.put(LoginActivity.this, "currentUserFamilyName", familyName);
+//                }
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             }

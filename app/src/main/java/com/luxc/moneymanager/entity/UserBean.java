@@ -16,7 +16,7 @@ public class UserBean {
     private int userType=2;
     //对应所属家庭id
     private Long familyID;
-    private String familyName;
+    private String familyName="";
     private String password;
     private String phoneNum;
 

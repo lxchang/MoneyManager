@@ -10,7 +10,7 @@ import com.luxc.moneymanager.entity.FamilyBean;
 
 public class ApplyListAdapter extends BaseQuickAdapter<ApplyBean, BaseViewHolder> {
     public ApplyListAdapter() {
-        super(R.layout.item_user_list_layout);
+        super(R.layout.item_apply_list_layout);
     }
 
     @Override
