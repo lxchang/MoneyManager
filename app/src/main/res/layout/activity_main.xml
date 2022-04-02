@@ -80,5 +80,15 @@
             android:textColor="#333"
             android:textSize="16dp" />
 
+        <TextView
+            android:id="@+id/tv_apply_list"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:text="申请列表"
+            android:textColor="#333"
+            android:textSize="16dp" />
+
     </LinearLayout>
 </LinearLayout>

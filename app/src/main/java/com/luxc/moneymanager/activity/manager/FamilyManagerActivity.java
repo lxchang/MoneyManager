@@ -87,10 +87,6 @@ public class FamilyManagerActivity extends BaseActivity {
                         initData();
                     }
 
-                    @Override
-                    public void cancelClick() {
-
-                    }
                 };
                 commonDialog.setText("确认删除该家庭？","");
                 commonDialog.showDialog();

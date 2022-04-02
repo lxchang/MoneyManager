@@ -81,7 +81,6 @@ public abstract class AbstractCommonDialog {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                cancelClick();
             }
         });
 
@@ -108,8 +107,6 @@ public abstract class AbstractCommonDialog {
      * 确认
      */
     public abstract void sureClick();
-
-    public abstract void cancelClick();
 
     /**
      * 设置文本

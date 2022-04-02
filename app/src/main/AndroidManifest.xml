@@ -46,6 +46,7 @@
         <activity android:name=".activity.MyPayActivity" />
         <activity android:name=".activity.AddRecordActivity" />
         <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.ApplyListActivity" />
 
     </application>
 

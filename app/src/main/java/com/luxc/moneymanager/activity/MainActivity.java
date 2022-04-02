@@ -34,6 +34,8 @@ public class MainActivity extends BaseActivity {
     LinearLayout llManagerLayout;
     @BindView(R.id.main_title)
     TextView mainTitle;
+    @BindView(R.id.tv_apply_list)
+    TextView tvApplyList;
 
     private static final String TAG = "MainActivity";
     private RxPermissions rxPermissions;
@@ -50,6 +52,7 @@ public class MainActivity extends BaseActivity {
         MultPermission2();
         int userType = (int) SharedPreferenceUtils.get(MainActivity.this, "currentUserType", 0);
         llManagerLayout.setVisibility(userType != 2 ? View.VISIBLE : View.GONE);
+        tvApplyList.setVisibility(userType == 0 ? View.VISIBLE : View.GONE);
 
     }
 
@@ -58,7 +61,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_my_info, R.id.tv_in, R.id.tv_out, R.id.tv_family_user, R.id.tv_user_manager, R.id.tv_family_manager})
+    @OnClick({R.id.tv_my_info, R.id.tv_in, R.id.tv_out, R.id.tv_family_user, R.id.tv_user_manager, R.id.tv_family_manager,R.id.tv_apply_list})
     public void onClickView(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -84,6 +87,10 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.tv_family_manager:
                 intent.setClass(this, FamilyManagerActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_apply_list:
+                intent.setClass(this, ApplyListActivity.class);
                 startActivity(intent);
                 break;
         }

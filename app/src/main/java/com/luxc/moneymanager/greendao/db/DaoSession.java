@@ -8,11 +8,13 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
+import com.luxc.moneymanager.entity.ApplyBean;
 import com.luxc.moneymanager.entity.FamilyBean;
 import com.luxc.moneymanager.entity.IncomePayRecordBean;
 import com.luxc.moneymanager.entity.UserBean;
 import com.luxc.moneymanager.entity.UserManager;
 
+import com.luxc.moneymanager.greendao.db.ApplyBeanDao;
 import com.luxc.moneymanager.greendao.db.FamilyBeanDao;
 import com.luxc.moneymanager.greendao.db.IncomePayRecordBeanDao;
 import com.luxc.moneymanager.greendao.db.UserBeanDao;
@@ -27,11 +29,13 @@ import com.luxc.moneymanager.greendao.db.UserManagerDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig applyBeanDaoConfig;
     private final DaoConfig familyBeanDaoConfig;
     private final DaoConfig incomePayRecordBeanDaoConfig;
     private final DaoConfig userBeanDaoConfig;
     private final DaoConfig userManagerDaoConfig;
 
+    private final ApplyBeanDao applyBeanDao;
     private final FamilyBeanDao familyBeanDao;
     private final IncomePayRecordBeanDao incomePayRecordBeanDao;
     private final UserBeanDao userBeanDao;
@@ -40,6 +44,9 @@ public class DaoSession extends AbstractDaoSession {
     public DaoSession(Database db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
         super(db);
+
+        applyBeanDaoConfig = daoConfigMap.get(ApplyBeanDao.class).clone();
+        applyBeanDaoConfig.initIdentityScope(type);
 
         familyBeanDaoConfig = daoConfigMap.get(FamilyBeanDao.class).clone();
         familyBeanDaoConfig.initIdentityScope(type);
@@ -53,11 +60,13 @@ public class DaoSession extends AbstractDaoSession {
         userManagerDaoConfig = daoConfigMap.get(UserManagerDao.class).clone();
         userManagerDaoConfig.initIdentityScope(type);
 
+        applyBeanDao = new ApplyBeanDao(applyBeanDaoConfig, this);
         familyBeanDao = new FamilyBeanDao(familyBeanDaoConfig, this);
         incomePayRecordBeanDao = new IncomePayRecordBeanDao(incomePayRecordBeanDaoConfig, this);
         userBeanDao = new UserBeanDao(userBeanDaoConfig, this);
         userManagerDao = new UserManagerDao(userManagerDaoConfig, this);
 
+        registerDao(ApplyBean.class, applyBeanDao);
         registerDao(FamilyBean.class, familyBeanDao);
         registerDao(IncomePayRecordBean.class, incomePayRecordBeanDao);
         registerDao(UserBean.class, userBeanDao);
@@ -65,10 +74,15 @@ public class DaoSession extends AbstractDaoSession {
     }
     
     public void clear() {
+        applyBeanDaoConfig.clearIdentityScope();
         familyBeanDaoConfig.clearIdentityScope();
         incomePayRecordBeanDaoConfig.clearIdentityScope();
         userBeanDaoConfig.clearIdentityScope();
         userManagerDaoConfig.clearIdentityScope();
+    }
+
+    public ApplyBeanDao getApplyBeanDao() {
+        return applyBeanDao;
     }
 
     public FamilyBeanDao getFamilyBeanDao() {
