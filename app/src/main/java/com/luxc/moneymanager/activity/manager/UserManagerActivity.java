@@ -2,6 +2,9 @@ package com.luxc.moneymanager.activity.manager;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -23,7 +26,10 @@ import butterknife.OnClick;
 
 public class UserManagerActivity extends BaseActivity {
     public static final int ADD_NEW_USER_FLAG = 1000;
-
+    @BindView(R.id.main_title)
+    TextView mainTitle;
+    @BindView(R.id.ll_right)
+    LinearLayout llRight;
     @BindView(R.id.rv_user)
     RecyclerView rvUser;
 
@@ -36,6 +42,8 @@ public class UserManagerActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        mainTitle.setText("用户管理");
+        llRight.setVisibility(View.VISIBLE);
         userListAdapter = new UserListAdapter();
         rvUser.setAdapter(userListAdapter);
     }
@@ -46,7 +54,7 @@ public class UserManagerActivity extends BaseActivity {
         userListAdapter.setNewInstance(DaoUtils.queryAllUser());
     }
 
-    @OnClick(R.id.add)
+    @OnClick(R.id.ll_right)
     public void onClick() {
         Intent intent = new Intent(this,AddNewUserAccountActivity.class);
         startActivityForResult(intent,ADD_NEW_USER_FLAG);

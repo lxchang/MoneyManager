@@ -2,6 +2,7 @@ package com.luxc.moneymanager.activity.manager;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,9 +26,10 @@ import butterknife.OnClick;
 
 public class FamilyManagerActivity extends BaseActivity {
     public static final int ADD_NEW_FAMILY_FLAG = 1001;
-
-    @BindView(R.id.add)
-    TextView tvAdd;
+    @BindView(R.id.main_title)
+    TextView mainTitle;
+    @BindView(R.id.ll_right)
+    LinearLayout llRight;
     @BindView(R.id.rv_user)
     RecyclerView rvUser;
 
@@ -40,6 +42,8 @@ public class FamilyManagerActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        mainTitle.setText("家庭管理");
+
         familyListAdapter = new FamilyListAdapter();
         rvUser.setAdapter(familyListAdapter);
         familyListAdapter.setOnItemClickListener(new OnItemClickListener() {
@@ -63,14 +67,14 @@ public class FamilyManagerActivity extends BaseActivity {
     protected void initData() {
         List<FamilyBean> familyBeans = DaoUtils.queryAllFamily();
         if (familyBeans != null && familyBeans.size() > 0) {
-            tvAdd.setVisibility(View.GONE);
+            llRight.setVisibility(View.GONE);
         } else {
-            tvAdd.setVisibility(View.VISIBLE);
+            llRight.setVisibility(View.VISIBLE);
         }
         familyListAdapter.setNewInstance(DaoUtils.queryAllFamily());
     }
 
-    @OnClick(R.id.add)
+    @OnClick(R.id.ll_right)
     public void onClick() {
         Intent intent = new Intent(this, AddFamilyActivity.class);
         startActivityForResult(intent, ADD_NEW_FAMILY_FLAG);

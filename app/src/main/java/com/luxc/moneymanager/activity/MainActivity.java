@@ -10,6 +10,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luxc.moneymanager.activity.manager.FamilyManagerActivity;
@@ -27,8 +28,12 @@ import com.luxc.moneymanager.R;
 import com.luxc.moneymanager.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {
+    @BindView(R.id.ll_back)
+    LinearLayout llBack;
     @BindView(R.id.ll_manager_layout)
     LinearLayout llManagerLayout;
+    @BindView(R.id.main_title)
+    TextView mainTitle;
 
     private static final String TAG = "MainActivity";
     private RxPermissions rxPermissions;
@@ -40,6 +45,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        llBack.setVisibility(View.GONE);
+        mainTitle.setText("首页");
         MultPermission2();
         int userType = (int) SharedPreferenceUtils.get(MainActivity.this, "currentUserType", 0);
         llManagerLayout.setVisibility(userType != 2 ? View.VISIBLE : View.GONE);

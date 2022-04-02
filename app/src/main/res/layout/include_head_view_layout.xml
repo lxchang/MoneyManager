@@ -6,7 +6,7 @@
     android:background="@color/white">
 
     <LinearLayout
-        android:id="@+id/toolbar_back"
+        android:id="@+id/ll_back"
         android:layout_width="60dp"
         android:layout_height="match_parent"
         android:gravity="center">
@@ -19,7 +19,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/toolbar_title"
+        android:id="@+id/main_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"

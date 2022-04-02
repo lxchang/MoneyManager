@@ -30,6 +30,8 @@ public class LoginActivity extends BaseActivity {
     TextView tvForgetPwd;
     @BindView(R.id.btn_login)
     TextView btnLogin;
+    @BindView(R.id.main_title)
+    TextView mainTitle;
 
     private String account;
     private String password;
@@ -41,7 +43,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        mainTitle.setText("登录");
 
     }
 
@@ -50,9 +52,12 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_forget_pwd, R.id.btn_login,R.id.tv_to_register})
+    @OnClick({R.id.ll_back,R.id.tv_forget_pwd, R.id.btn_login,R.id.tv_to_register})
     public void onViewClick(View view) {
         switch (view.getId()) {
+            case R.id.ll_back:
+                finish();
+                break;
             case R.id.tv_forget_pwd:
                 break;
             case R.id.tv_to_register:

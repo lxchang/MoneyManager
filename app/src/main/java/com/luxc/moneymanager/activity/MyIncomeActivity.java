@@ -2,6 +2,9 @@ package com.luxc.moneymanager.activity;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +22,10 @@ import butterknife.OnClick;
 
 public class MyIncomeActivity extends BaseActivity {
     public static final int ADD_NEW_USER_FLAG = 1000;
-
+    @BindView(R.id.main_title)
+    TextView mainTitle;
+    @BindView(R.id.ll_right)
+    LinearLayout llRight;
     @BindView(R.id.rv_user)
     RecyclerView rvUser;
 
@@ -32,6 +38,8 @@ public class MyIncomeActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        mainTitle.setText("收支记录");
+        llRight.setVisibility(View.VISIBLE);
         incomePayAdapter = new IncomePayAdapter();
         rvUser.setAdapter(incomePayAdapter);
     }
@@ -42,7 +50,7 @@ public class MyIncomeActivity extends BaseActivity {
         incomePayAdapter.setNewInstance(DaoUtils.queryRecordByUserId(userId));
     }
 
-    @OnClick(R.id.add)
+    @OnClick(R.id.ll_right)
     public void onClick() {
         Intent intent = new Intent(this, AddRecordActivity.class);
         startActivityForResult(intent,ADD_NEW_USER_FLAG);

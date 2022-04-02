@@ -2,6 +2,7 @@ package com.luxc.moneymanager.activity;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.luxc.moneymanager.R;
 import com.luxc.moneymanager.application.MyApp;
@@ -12,6 +13,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class AddRecordActivity extends BaseActivity {
+    @BindView(R.id.main_title)
+    TextView mainTitle;
     @BindView(R.id.et_name)
     EditText etName;
     @BindView(R.id.et_type)
@@ -28,7 +31,7 @@ public class AddRecordActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+    mainTitle.setText("添加记录");
     }
 
     @Override
@@ -36,9 +39,12 @@ public class AddRecordActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.btn_add)
+    @OnClick({R.id.btn_add,R.id.ll_back})
     public void onViewClick(View view){
         switch (view.getId()){
+            case R.id.ll_back:
+                finish();
+                break;
             case R.id.btn_add:
                 IncomePayRecordBean incomePayRecordBean = new IncomePayRecordBean();
                 incomePayRecordBean.setUser("小明爸");

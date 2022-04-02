@@ -19,11 +19,12 @@ import butterknife.OnClick;
 
 public class FamilyUserManagerActivity extends BaseActivity {
     public static final int ADD_NEW_USER_FLAG = 1000;
-
+    @BindView(R.id.main_title)
+    TextView mainTitle;
     @BindView(R.id.rv_user)
     RecyclerView rvUser;
-    @BindView(R.id.add)
-    TextView tvAdd;
+    @BindView(R.id.ll_right)
+    TextView llRight;
 
     private UserListAdapter userListAdapter;
 
@@ -34,10 +35,11 @@ public class FamilyUserManagerActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        mainTitle.setText("家庭成员管理");
         userListAdapter = new UserListAdapter();
         rvUser.setAdapter(userListAdapter);
         int userType = (int) SharedPreferenceUtils.get(FamilyUserManagerActivity.this, "currentUserType", 0);
-        tvAdd.setVisibility(userType != 2 ? View.VISIBLE : View.GONE);
+        llRight.setVisibility(userType != 2 ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -46,7 +48,7 @@ public class FamilyUserManagerActivity extends BaseActivity {
         userListAdapter.setNewInstance(DaoUtils.queryByFamilyId(familyId));
     }
 
-    @OnClick(R.id.add)
+    @OnClick(R.id.ll_right)
     public void onClick() {
         Intent intent = new Intent(this, AddNewUserAccountActivity.class);
         startActivityForResult(intent, ADD_NEW_USER_FLAG);

@@ -2,6 +2,7 @@ package com.luxc.moneymanager.activity;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -31,6 +32,8 @@ public class UserInfoActivity extends BaseActivity {
     TextView tvBirthday;
     @BindView(R.id.tv_family_name)
     TextView tvFamilyName;
+    @BindView(R.id.main_title)
+    TextView mainTitle;
 
     @Override
     protected int getLayoutId() {
@@ -39,6 +42,7 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        mainTitle.setText("个人信息");
     }
 
     @Override
@@ -55,12 +59,19 @@ public class UserInfoActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.tv_family_name)
-    public void onViewClick(){
-        if (TextUtils.isEmpty(tvFamilyName.getText().toString())) {
-            startActivityForResult(new Intent(UserInfoActivity.this, AddFamilyActivity.class), 1002);
-        }else{
-            startActivity(new Intent(UserInfoActivity.this, FamilyUserManagerActivity.class));
+    @OnClick({R.id.ll_back,R.id.tv_family_name})
+    public void onViewClick(View view){
+        switch (view.getId()){
+            case R.id.ll_back:
+                finish();
+                break;
+            case R.id.tv_family_name:
+                if (TextUtils.isEmpty(tvFamilyName.getText().toString())) {
+                    startActivityForResult(new Intent(UserInfoActivity.this, AddFamilyActivity.class), 1002);
+                }else{
+                    startActivity(new Intent(UserInfoActivity.this, FamilyUserManagerActivity.class));
+                }
+                break;
         }
     }
 
