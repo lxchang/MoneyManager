@@ -140,7 +140,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
             android:gravity="center_vertical|end"
-            android:hint="您还没有创建家庭，点击去创建～"
             android:textColor="#333"
             android:textSize="14dp" />
     </LinearLayout>

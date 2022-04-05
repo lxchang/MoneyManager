@@ -1,41 +1,43 @@
 package com.luxc.moneymanager.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.luxc.moneymanager.R;
 import com.luxc.moneymanager.activity.manager.FamilyManagerActivity;
+import com.luxc.moneymanager.activity.manager.FamilyUserManagerActivity;
 import com.luxc.moneymanager.activity.manager.UserManagerActivity;
+import com.luxc.moneymanager.base.BaseActivity;
 import com.luxc.moneymanager.utils.SharedPreferenceUtils;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
-
-import com.luxc.moneymanager.R;
-import com.luxc.moneymanager.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.ll_back)
     LinearLayout llBack;
-    @BindView(R.id.ll_manager_layout)
-    LinearLayout llManagerLayout;
     @BindView(R.id.main_title)
     TextView mainTitle;
     @BindView(R.id.tv_apply_list)
     TextView tvApplyList;
+    @BindView(R.id.tv_my_info)
+    TextView tvMyInfo;
+    @BindView(R.id.tv_user_manager)
+    TextView tvUserManager;
+    @BindView(R.id.tv_family_manager)
+    TextView tvFamilyManager;
+    @BindView(R.id.tv_family_member_manager)
+    TextView tvFamilyMemberManager;
+    @BindView(R.id.tv_record)
+    TextView tvRecord;
 
     private static final String TAG = "MainActivity";
     private RxPermissions rxPermissions;
@@ -51,9 +53,33 @@ public class MainActivity extends BaseActivity {
         mainTitle.setText("首页");
         MultPermission2();
         int userType = (int) SharedPreferenceUtils.get(MainActivity.this, "currentUserType", 0);
-        llManagerLayout.setVisibility(userType != 2 ? View.VISIBLE : View.GONE);
-        tvApplyList.setVisibility(userType == 0 ? View.VISIBLE : View.GONE);
 
+        switch (userType) {
+            case 0://系统管理员
+                tvMyInfo.setVisibility(View.GONE);
+                tvRecord.setVisibility(View.GONE);
+                tvApplyList.setVisibility(View.VISIBLE);
+                tvUserManager.setVisibility(View.VISIBLE);
+                tvFamilyManager.setVisibility(View.GONE);
+                tvFamilyMemberManager.setVisibility(View.GONE);
+                break;
+            case 1://家庭管理员
+                tvMyInfo.setVisibility(View.VISIBLE);
+                tvRecord.setVisibility(View.VISIBLE);
+                tvApplyList.setVisibility(View.GONE);
+                tvUserManager.setVisibility(View.GONE);
+                tvFamilyManager.setVisibility(View.VISIBLE);
+                tvFamilyMemberManager.setVisibility(View.VISIBLE);
+                break;
+            case 2://普通用户
+                tvMyInfo.setVisibility(View.VISIBLE);
+                tvRecord.setVisibility(View.VISIBLE);
+                tvApplyList.setVisibility(View.GONE);
+                tvUserManager.setVisibility(View.GONE);
+                tvFamilyMemberManager.setVisibility(View.GONE);
+                tvFamilyManager.setVisibility(View.GONE);
+                break;
+        }
     }
 
     @Override
@@ -61,7 +87,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_my_info, R.id.tv_in, R.id.tv_out, R.id.tv_family_user, R.id.tv_user_manager, R.id.tv_family_manager,R.id.tv_apply_list})
+    @OnClick({R.id.tv_my_info, R.id.tv_record, R.id.tv_family_member_manager, R.id.tv_user_manager, R.id.tv_family_manager, R.id.tv_apply_list})
     public void onClickView(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -69,24 +95,20 @@ public class MainActivity extends BaseActivity {
                 intent.setClass(this, UserInfoActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.tv_in:
+            case R.id.tv_record:
                 intent.setClass(this, MyIncomeActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.tv_out:
-                intent.setClass(this, MyPayActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.tv_family_user:
-                intent.setClass(this, UserManagerActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.tv_user_manager:
-                intent.setClass(this, UserManagerActivity.class);
+            case R.id.tv_family_member_manager:
+                intent.setClass(this, FamilyUserManagerActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_family_manager:
                 intent.setClass(this, FamilyManagerActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_user_manager:
+                intent.setClass(this, UserManagerActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_apply_list:

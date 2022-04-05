@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.luxc.moneymanager.activity.MainActivity">
 
-    <include layout="@layout/include_head_view_layout"/>
+    <include layout="@layout/include_head_view_layout" />
 
     <TextView
         android:id="@+id/tv_my_info"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
         android:gravity="center_vertical"
         android:padding="8dp"
         android:text="个人信息"
         android:textColor="#333"
         android:textSize="16dp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc" />
+
     <TextView
-        android:id="@+id/tv_in"
+        android:id="@+id/tv_record"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center_vertical"
@@ -31,64 +34,69 @@
         android:textColor="#333"
         android:textSize="16dp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc" />
+
     <TextView
-        android:id="@+id/tv_out"
+        android:id="@+id/tv_family_member_manager"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginBottom="20dp"
         android:gravity="center_vertical"
         android:padding="8dp"
-        android:visibility="gone"
-        android:text="我的支出"
+        android:text="家庭成员管理"
         android:textColor="#333"
         android:textSize="16dp" />
 
-    <LinearLayout
-        android:id="@+id/ll_manager_layout"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="1dp"
+        android:background="#ccc" />
 
-        <TextView
-            android:id="@+id/tv_family_user"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="家庭成员"
-            android:visibility="gone"
-            android:textColor="#333"
-            android:textSize="16dp" />
+    <TextView
+        android:id="@+id/tv_family_manager"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="家庭管理"
+        android:textColor="#333"
+        android:textSize="16dp" />
 
-        <TextView
-            android:id="@+id/tv_user_manager"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="人员管理"
-            android:textColor="#333"
-            android:textSize="16dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc" />
 
-        <TextView
-            android:id="@+id/tv_family_manager"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="家庭管理"
-            android:textColor="#333"
-            android:textSize="16dp" />
+    <TextView
+        android:id="@+id/tv_user_manager"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="用户管理"
+        android:textColor="#333"
+        android:textSize="16dp" />
 
-        <TextView
-            android:id="@+id/tv_apply_list"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="申请列表"
-            android:textColor="#333"
-            android:textSize="16dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_apply_list"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="申请列表"
+        android:textColor="#333"
+        android:textSize="16dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc" />
+
 </LinearLayout>

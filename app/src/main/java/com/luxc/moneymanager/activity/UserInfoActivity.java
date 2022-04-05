@@ -1,5 +1,6 @@
 package com.luxc.moneymanager.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -44,6 +45,7 @@ public class UserInfoActivity extends BaseActivity {
 
     private Long userId;
     private String userName;
+    private int userType = 2;
 
     @Override
     protected int getLayoutId() {
@@ -63,17 +65,22 @@ public class UserInfoActivity extends BaseActivity {
             UserBean userBean = userBeans.get(0);
             userId = userBean.getId();
             userName = userBean.getName();
+            userType = userBean.getUserType();
 
             tvName.setText(userName);
             tvSex.setText(userBean.getSex());
             tvAge.setText(userBean.getAge());
             tvBirthday.setText(userBean.getBirthday());
             tvFamilyName.setText(userBean.getFamilyName());
+            if (userType == 0) {
+                tvFamilyName.setHint("您还没有创建家庭，点击去创建～");
+            }
             applyManager.setVisibility(userBean.getUserType() == 2 ? View.VISIBLE : View.GONE);
         }
     }
 
-    @OnClick({R.id.ll_back, R.id.tv_family_name,R.id.sure})
+    @SuppressLint("NonConstantResourceId")
+    @OnClick({R.id.ll_back, R.id.tv_family_name, R.id.sure})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.ll_back:
@@ -81,25 +88,26 @@ public class UserInfoActivity extends BaseActivity {
                 break;
             case R.id.tv_family_name:
                 if (TextUtils.isEmpty(tvFamilyName.getText().toString())) {
-                    startActivityForResult(new Intent(UserInfoActivity.this, AddFamilyActivity.class), 1002);
+                    if (userType == 0)
+                        startActivityForResult(new Intent(UserInfoActivity.this, AddFamilyActivity.class), 1002);
                 } else {
                     startActivity(new Intent(UserInfoActivity.this, FamilyUserManagerActivity.class));
                 }
                 break;
             case R.id.sure:
-                AbstractCommonDialog commonDialog =new AbstractCommonDialog(UserInfoActivity.this) {
+                AbstractCommonDialog commonDialog = new AbstractCommonDialog(UserInfoActivity.this) {
                     @Override
                     public void sureClick() {
-                        applyToManager(userId,userName);
+                        applyToManager(userId, userName);
                     }
                 };
-                commonDialog.setText("申请为管理员","确认申请为家庭管理员身份？");
+                commonDialog.setText("申请为管理员", "确认申请为家庭管理员身份？");
                 commonDialog.showDialog();
                 break;
         }
     }
 
-    private void applyToManager(Long userId,String userName) {
+    private void applyToManager(Long userId, String userName) {
         ApplyBean applyBean = new ApplyBean();
         applyBean.setApplyUserId(userId);
         applyBean.setApplyUserName(userName);
