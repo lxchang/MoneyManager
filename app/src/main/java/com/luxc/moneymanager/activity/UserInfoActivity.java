@@ -55,6 +55,7 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     protected void initView() {
         mainTitle.setText("个人信息");
+        applyManager.setText("申请家庭管理员");
     }
 
     @Override

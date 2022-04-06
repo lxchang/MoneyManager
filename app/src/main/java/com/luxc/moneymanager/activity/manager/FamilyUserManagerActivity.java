@@ -28,6 +28,8 @@ public class FamilyUserManagerActivity extends BaseActivity {
     LinearLayout llRight;
 
     private UserListAdapter userListAdapter;
+    private Long familyId;
+    private String familyName;
 
     @Override
     protected int getLayoutId() {
@@ -45,18 +47,21 @@ public class FamilyUserManagerActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        Long familyId = (Long) SharedPreferenceUtils.get(FamilyUserManagerActivity.this, "currentUserFamilyId", 0L);
+        familyId = (Long) SharedPreferenceUtils.get(FamilyUserManagerActivity.this, "currentUserFamilyId", 0L);
+        familyName = (String) SharedPreferenceUtils.get(FamilyUserManagerActivity.this, "currentUserFamilyName", "");
         userListAdapter.setNewInstance(DaoUtils.queryByFamilyId(familyId));
     }
 
-    @OnClick({R.id.ll_right,R.id.ll_back})
+    @OnClick({R.id.ll_right, R.id.ll_back})
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.ll_back:
                 finish();
                 break;
             case R.id.ll_right:
                 Intent intent = new Intent(this, UserListActivity.class);
+                intent.putExtra("familyId", familyId);
+                intent.putExtra("familyName", familyName);
                 startActivityForResult(intent, ADD_NEW_USER_FLAG);
                 break;
         }

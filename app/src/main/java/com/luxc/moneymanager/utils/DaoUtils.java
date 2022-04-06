@@ -28,7 +28,7 @@ public class DaoUtils {
      * @return
      */
     public static List<UserBean> querySearchByName(String userName) {
-        return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().where(UserBeanDao.Properties.Name.like("%"+userName+"%")).list();
+        return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().where(UserBeanDao.Properties.FamilyID.eq(null),UserBeanDao.Properties.Name.like("%"+userName+"%")).list();
     }
 
     /**
