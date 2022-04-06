@@ -47,6 +47,7 @@
         <activity android:name=".activity.AddRecordActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.ApplyListActivity" />
+        <activity android:name=".activity.UserListActivity" />
 
     </application>
 

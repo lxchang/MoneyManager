@@ -72,7 +72,7 @@ public class UserInfoActivity extends BaseActivity {
             tvAge.setText(userBean.getAge());
             tvBirthday.setText(userBean.getBirthday());
             tvFamilyName.setText(userBean.getFamilyName());
-            if (userType == 0) {
+            if (userType == 1) {
                 tvFamilyName.setHint("您还没有创建家庭，点击去创建～");
             }
             applyManager.setVisibility(userBean.getUserType() == 2 ? View.VISIBLE : View.GONE);
@@ -88,7 +88,7 @@ public class UserInfoActivity extends BaseActivity {
                 break;
             case R.id.tv_family_name:
                 if (TextUtils.isEmpty(tvFamilyName.getText().toString())) {
-                    if (userType == 0)
+                    if (userType == 1)
                         startActivityForResult(new Intent(UserInfoActivity.this, AddFamilyActivity.class), 1002);
                 } else {
                     startActivity(new Intent(UserInfoActivity.this, FamilyUserManagerActivity.class));

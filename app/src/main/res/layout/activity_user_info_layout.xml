@@ -85,6 +85,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
             android:gravity="center_vertical|end"
+            android:hint="未填写"
             android:textColor="#333"
             android:textSize="14dp" />
     </LinearLayout>
@@ -112,7 +113,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
             android:gravity="center_vertical|end"
-
+            android:hint="未填写"
             android:textColor="#333"
             android:textSize="14dp" />
     </LinearLayout>
@@ -140,6 +141,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
             android:gravity="center_vertical|end"
+            android:hint="未加入任何家庭"
             android:textColor="#333"
             android:textSize="14dp" />
     </LinearLayout>

@@ -1,14 +1,15 @@
 package com.luxc.moneymanager.activity.manager;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.luxc.moneymanager.R;
+import com.luxc.moneymanager.activity.UserListActivity;
 import com.luxc.moneymanager.adapter.UserListAdapter;
 import com.luxc.moneymanager.base.BaseActivity;
 import com.luxc.moneymanager.utils.DaoUtils;
@@ -24,7 +25,7 @@ public class FamilyUserManagerActivity extends BaseActivity {
     @BindView(R.id.rv_user)
     RecyclerView rvUser;
     @BindView(R.id.ll_right)
-    TextView llRight;
+    LinearLayout llRight;
 
     private UserListAdapter userListAdapter;
 
@@ -38,8 +39,8 @@ public class FamilyUserManagerActivity extends BaseActivity {
         mainTitle.setText("家庭成员管理");
         userListAdapter = new UserListAdapter();
         rvUser.setAdapter(userListAdapter);
-        int userType = (int) SharedPreferenceUtils.get(FamilyUserManagerActivity.this, "currentUserType", 0);
-        llRight.setVisibility(userType != 2 ? View.VISIBLE : View.GONE);
+        int userType = (int) SharedPreferenceUtils.get(FamilyUserManagerActivity.this, "currentUserType", 2);
+        llRight.setVisibility(userType == 1 ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class FamilyUserManagerActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.ll_right:
-                Intent intent = new Intent(this, AddNewUserAccountActivity.class);
+                Intent intent = new Intent(this, UserListActivity.class);
                 startActivityForResult(intent, ADD_NEW_USER_FLAG);
                 break;
         }

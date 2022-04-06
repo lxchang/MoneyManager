@@ -103,7 +103,7 @@ public class LoginActivity extends BaseActivity {
                         userBean.setFamilyID(0L);
                         userBean.setUserType(0);
                         MyApp.getInstance().getDaoSession().insert(userBean);
-                        login("admin","123",0L,0,0L,"");
+                        login("admin","123",0L,0,-1L,"");
                     } else {
                         Toast.makeText(LoginActivity.this, "没有该用户", Toast.LENGTH_SHORT).show();
                     }
@@ -121,10 +121,10 @@ public class LoginActivity extends BaseActivity {
                 SharedPreferenceUtils.put(LoginActivity.this, "currentUser", account);
                 SharedPreferenceUtils.put(LoginActivity.this, "currentUserId", userId);
                 SharedPreferenceUtils.put(LoginActivity.this, "currentUserType", userType);
-//                if (familyID!=null) {
-//                    SharedPreferenceUtils.put(LoginActivity.this, "currentUserFamilyId", familyID);
-//                    SharedPreferenceUtils.put(LoginActivity.this, "currentUserFamilyName", familyName);
-//                }
+                if (familyID!=null) {
+                    SharedPreferenceUtils.put(LoginActivity.this, "currentUserFamilyId", familyID);
+                    SharedPreferenceUtils.put(LoginActivity.this, "currentUserFamilyName", familyName);
+                }
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             }
