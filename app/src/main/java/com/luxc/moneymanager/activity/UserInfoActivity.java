@@ -76,7 +76,7 @@ public class UserInfoActivity extends BaseActivity {
             if (userType == 1) {
                 tvFamilyName.setHint("您还没有创建家庭，点击去创建～");
             }
-            applyManager.setVisibility(userBean.getUserType() == 2 ? View.VISIBLE : View.GONE);
+            applyManager.setVisibility(userBean.getUserType() == 2 && userBean.getFamilyID() == null ? View.VISIBLE : View.GONE);
         }
     }
 

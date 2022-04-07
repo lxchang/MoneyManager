@@ -56,7 +56,6 @@ public class UserListActivity extends BaseActivity {
         Long familyId = getIntent().getLongExtra("familyId",-1L);
         String familyName = getIntent().getStringExtra("familyName");
         mainTitle.setText("邀请成员");
-        llRight.setVisibility(View.VISIBLE);
         userListAdapter = new UserListAdapter();
         rvUser.setAdapter(userListAdapter);
         etSearch.addTextChangedListener(new TextWatcher() {
@@ -78,8 +77,12 @@ public class UserListActivity extends BaseActivity {
                 }else{
                     userBeans = DaoUtils.queryAllNotFamilyUser();
                 }
-
-                userListAdapter.setNewInstance(userBeans);
+                if (userBeans==null || userBeans.size()==0){
+                    userListAdapter.setNewInstance(null);
+                    userListAdapter.setEmptyView(R.layout.empty_layout);
+                }else{
+                    userListAdapter.setNewInstance(userBeans);
+                }
             }
         });
 
@@ -94,6 +97,7 @@ public class UserListActivity extends BaseActivity {
                         userBean.setFamilyName(familyName);
                         MyApp.getInstance().getDaoSession().getUserBeanDao().update(userBean);
                         ToastUtils.showShort("邀请成功");
+                        initData();
                     }
                 };
                 commonDialog.setText("提示","确认邀请加入");
@@ -105,19 +109,21 @@ public class UserListActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        userListAdapter.setNewInstance(DaoUtils.queryAllNotFamilyUser());
+        List<UserBean> list = DaoUtils.queryAllNotFamilyUser();
+        if (list==null || list.size()==0){
+            userListAdapter.setNewInstance(null);
+            userListAdapter.setEmptyView(R.layout.empty_layout);
+        }else {
+            userListAdapter.setNewInstance(list);
+        }
     }
 
-    @OnClick({R.id.ll_right,R.id.ll_back})
+    @OnClick({R.id.ll_back})
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.ll_back:
                 setResult(RESULT_OK);
                 finish();
-                break;
-            case R.id.ll_right:
-//                Intent intent = new Intent(this, AddNewUserAccountActivity.class);
-//                startActivityForResult(intent,ADD_NEW_USER_FLAG);
                 break;
         }
     }

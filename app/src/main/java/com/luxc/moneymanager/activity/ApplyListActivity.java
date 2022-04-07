@@ -1,6 +1,7 @@
 package com.luxc.moneymanager.activity;
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +28,8 @@ import butterknife.OnClick;
 public class ApplyListActivity extends BaseActivity {
     @BindView(R.id.rv_list)
     RecyclerView rvList;
+    @BindView(R.id.main_title)
+    TextView mainTitle;
 
     private ApplyListAdapter mAdapter;
 
@@ -37,6 +40,8 @@ public class ApplyListActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        mainTitle.setText("申请列表");
+
         mAdapter = new ApplyListAdapter();
         rvList.setAdapter(mAdapter);
 
@@ -76,7 +81,11 @@ public class ApplyListActivity extends BaseActivity {
     @Override
     protected void initData() {
         List<ApplyBean> list = MyApp.getInstance().getDaoSession().getApplyBeanDao().queryBuilder().where(ApplyBeanDao.Properties.Status.eq(0)).list();
-        mAdapter.setNewInstance(list);
+        if (list==null || list.size()==0){
+            mAdapter.setEmptyView(R.layout.empty_layout);
+        }else{
+            mAdapter.setNewInstance(list);
+        }
     }
 
     @OnClick(R.id.ll_back)

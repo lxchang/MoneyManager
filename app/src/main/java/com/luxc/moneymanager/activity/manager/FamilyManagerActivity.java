@@ -63,7 +63,7 @@ public class FamilyManagerActivity extends BaseActivity {
                 Intent intent = new Intent(FamilyManagerActivity.this, AddFamilyActivity.class);
                 intent.putExtra("bean", familyBean);
                 intent.putExtra("type", 1);
-                startActivityForResult(intent,ADD_NEW_FAMILY_FLAG);
+                startActivityForResult(intent, ADD_NEW_FAMILY_FLAG);
 
             }
         });
@@ -83,12 +83,12 @@ public class FamilyManagerActivity extends BaseActivity {
                         }
 
                         MyApp.getInstance().getDaoSession().getFamilyBeanDao().deleteByKey(familyBean.getFamilyId());
-                        Toast.makeText(FamilyManagerActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FamilyManagerActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                         initData();
                     }
 
                 };
-                commonDialog.setText("确认删除该家庭？","");
+                commonDialog.setText("确认删除该家庭？", "");
                 commonDialog.showDialog();
                 return false;
             }
@@ -103,12 +103,17 @@ public class FamilyManagerActivity extends BaseActivity {
         } else {
             llRight.setVisibility(View.VISIBLE);
         }
-        familyListAdapter.setNewInstance(DaoUtils.queryAllFamily());
+        if (familyBeans == null || familyBeans.size() == 0) {
+            familyListAdapter.setNewInstance(null);
+            familyListAdapter.setEmptyView(R.layout.empty_layout);
+        } else {
+            familyListAdapter.setNewInstance(DaoUtils.queryAllFamily());
+        }
     }
 
-    @OnClick({R.id.ll_right,R.id.ll_back})
+    @OnClick({R.id.ll_right, R.id.ll_back})
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.ll_back:
                 finish();
                 break;

@@ -24,6 +24,8 @@ import com.luxc.moneymanager.utils.DaoUtils;
 import com.luxc.moneymanager.utils.SharedPreferenceUtils;
 import com.luxc.moneymanager.utils.ToastUtils;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -71,7 +73,14 @@ public class MyIncomeActivity extends BaseActivity {
     @Override
     protected void initData() {
         Long userId = (Long) SharedPreferenceUtils.get(MyIncomeActivity.this,"currentUserId",0L);
-        incomePayAdapter.setNewInstance(DaoUtils.queryRecordByUserId(userId));
+        List<IncomePayRecordBean> list = DaoUtils.queryRecordByUserId(userId);
+        if (list==null || list.size()==0){
+            incomePayAdapter.setNewInstance(null);
+            incomePayAdapter.setEmptyView(R.layout.empty_layout);
+        }else{
+            incomePayAdapter.setNewInstance(list);
+
+        }
     }
 
     @OnClick({R.id.ll_right,R.id.ll_back})
