@@ -114,8 +114,8 @@
                 android:textColor="#333"
                 android:textSize="14dp" />
 
-            <EditText
-                android:id="@+id/et_date"
+            <TextView
+                android:id="@+id/tv_date"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -123,7 +123,7 @@
                 android:layout_marginEnd="12dp"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="请输入出生日期"
+                android:hint="请选择日期"
                 android:textColor="#333"
                 android:textSize="14dp" />
         </LinearLayout>
