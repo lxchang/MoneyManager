@@ -17,8 +17,9 @@ public class IncomePayAdapter extends BaseQuickAdapter<IncomePayRecordBean, Base
 
     @Override
     protected void convert(@NonNull BaseViewHolder baseViewHolder, IncomePayRecordBean incomePayRecordBean) {
-        baseViewHolder.setText(R.id.tv_user_name, incomePayRecordBean.getUser());
-        baseViewHolder.setText(R.id.tv_type, (incomePayRecordBean.getType() == 1)?"收入":"支出");
+        baseViewHolder.setText(R.id.tv_title, incomePayRecordBean.getTitle());
+//        baseViewHolder.setText(R.id.tv_type, (incomePayRecordBean.getType() == 1)?"收入":"支出");
+        baseViewHolder.setText(R.id.tv_date, incomePayRecordBean.getTime());
         baseViewHolder.setText(R.id.tv_money, incomePayRecordBean.getType() != 1?"-"+incomePayRecordBean.getMoney():incomePayRecordBean.getMoney());
         baseViewHolder.setTextColor(R.id.tv_money, incomePayRecordBean.getType() != 1?Color.RED:Color.GREEN);
     }

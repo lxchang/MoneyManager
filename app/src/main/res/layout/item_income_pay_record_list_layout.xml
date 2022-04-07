@@ -11,7 +11,7 @@
         android:layout_marginHorizontal="12dp">
 
         <TextView
-            android:id="@+id/tv_user_name"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -23,7 +23,7 @@
             tools:text="小明" />
 
         <TextView
-            android:id="@+id/tv_type"
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

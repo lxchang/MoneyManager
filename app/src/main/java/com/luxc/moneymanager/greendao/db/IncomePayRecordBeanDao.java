@@ -30,6 +30,8 @@ public class IncomePayRecordBeanDao extends AbstractDao<IncomePayRecordBean, Lon
         public final static Property UserId = new Property(3, Long.class, "userId", false, "USER_ID");
         public final static Property User = new Property(4, String.class, "user", false, "USER");
         public final static Property Money = new Property(5, String.class, "money", false, "MONEY");
+        public final static Property Title = new Property(6, String.class, "title", false, "TITLE");
+        public final static Property Description = new Property(7, String.class, "description", false, "DESCRIPTION");
     }
 
 
@@ -50,7 +52,9 @@ public class IncomePayRecordBeanDao extends AbstractDao<IncomePayRecordBean, Lon
                 "\"TIME\" TEXT," + // 2: time
                 "\"USER_ID\" INTEGER," + // 3: userId
                 "\"USER\" TEXT," + // 4: user
-                "\"MONEY\" TEXT);"); // 5: money
+                "\"MONEY\" TEXT," + // 5: money
+                "\"TITLE\" TEXT," + // 6: title
+                "\"DESCRIPTION\" TEXT);"); // 7: description
     }
 
     /** Drops the underlying database table. */
@@ -88,6 +92,16 @@ public class IncomePayRecordBeanDao extends AbstractDao<IncomePayRecordBean, Lon
         if (money != null) {
             stmt.bindString(6, money);
         }
+ 
+        String title = entity.getTitle();
+        if (title != null) {
+            stmt.bindString(7, title);
+        }
+ 
+        String description = entity.getDescription();
+        if (description != null) {
+            stmt.bindString(8, description);
+        }
     }
 
     @Override
@@ -119,6 +133,16 @@ public class IncomePayRecordBeanDao extends AbstractDao<IncomePayRecordBean, Lon
         if (money != null) {
             stmt.bindString(6, money);
         }
+ 
+        String title = entity.getTitle();
+        if (title != null) {
+            stmt.bindString(7, title);
+        }
+ 
+        String description = entity.getDescription();
+        if (description != null) {
+            stmt.bindString(8, description);
+        }
     }
 
     @Override
@@ -134,7 +158,9 @@ public class IncomePayRecordBeanDao extends AbstractDao<IncomePayRecordBean, Lon
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // time
             cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // userId
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // user
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // money
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // money
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // title
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // description
         );
         return entity;
     }
@@ -147,6 +173,8 @@ public class IncomePayRecordBeanDao extends AbstractDao<IncomePayRecordBean, Lon
         entity.setUserId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
         entity.setUser(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setMoney(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setTitle(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setDescription(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
      }
     
     @Override

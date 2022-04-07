@@ -63,7 +63,7 @@ public class FamilyManagerActivity extends BaseActivity {
                 Intent intent = new Intent(FamilyManagerActivity.this, AddFamilyActivity.class);
                 intent.putExtra("bean", familyBean);
                 intent.putExtra("type", 1);
-                startActivity(intent);
+                startActivityForResult(intent,ADD_NEW_FAMILY_FLAG);
 
             }
         });

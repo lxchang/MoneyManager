@@ -6,16 +6,23 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemLongClickListener;
 import com.luxc.moneymanager.R;
 import com.luxc.moneymanager.activity.manager.AddNewUserAccountActivity;
 import com.luxc.moneymanager.adapter.IncomePayAdapter;
 import com.luxc.moneymanager.adapter.UserListAdapter;
+import com.luxc.moneymanager.application.MyApp;
 import com.luxc.moneymanager.base.BaseActivity;
+import com.luxc.moneymanager.dialog.AbstractCommonDialog;
+import com.luxc.moneymanager.entity.IncomePayRecordBean;
 import com.luxc.moneymanager.utils.DaoUtils;
 import com.luxc.moneymanager.utils.SharedPreferenceUtils;
+import com.luxc.moneymanager.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,6 +49,23 @@ public class MyIncomeActivity extends BaseActivity {
         llRight.setVisibility(View.VISIBLE);
         incomePayAdapter = new IncomePayAdapter();
         rvUser.setAdapter(incomePayAdapter);
+
+        incomePayAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                AbstractCommonDialog commonDialog = new AbstractCommonDialog(MyIncomeActivity.this) {
+                    @Override
+                    public void sureClick() {
+                        MyApp.getInstance().getDaoSession().getIncomePayRecordBeanDao().delete(incomePayAdapter.getData().get(position));
+                        ToastUtils.showShort("删除成功");
+                        initData();
+                    }
+                };
+                commonDialog.setText("提示","确认删除该条记录");
+                commonDialog.showDialog();
+                return false;
+            }
+        });
     }
 
     @Override

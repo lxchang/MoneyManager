@@ -18,20 +18,42 @@ public class IncomePayRecordBean {
     private Long userId;
     private String user;
     private String money;
-    
-    @Generated(hash = 1730957681)
+    private String title;
+    private String description;
+
+    @Generated(hash = 294039746)
     public IncomePayRecordBean(Long id, int type, String time, Long userId,
-            String user, String money) {
+            String user, String money, String title, String description) {
         this.id = id;
         this.type = type;
         this.time = time;
         this.userId = userId;
         this.user = user;
         this.money = money;
+        this.title = title;
+        this.description = description;
     }
+
     @Generated(hash = 2109134377)
     public IncomePayRecordBean() {
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Long getId() {
         return this.id;
     }

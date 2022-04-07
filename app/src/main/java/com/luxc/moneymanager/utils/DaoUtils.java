@@ -18,7 +18,7 @@ public class DaoUtils {
      * @param userName
      * @return
      */
-    public static List<UserBean> queryByName(String userName) {
+    public static List<UserBean> queryByPhone(String userName) {
         return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().where(UserBeanDao.Properties.PhoneNum.eq(userName)).list();
     }
     /**
@@ -28,7 +28,7 @@ public class DaoUtils {
      * @return
      */
     public static List<UserBean> querySearchByName(String userName) {
-        return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().where(UserBeanDao.Properties.FamilyID.eq(null),UserBeanDao.Properties.Name.like("%"+userName+"%")).list();
+        return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().where(UserBeanDao.Properties.FamilyID.isNull(),UserBeanDao.Properties.Name.notEq("admin"),UserBeanDao.Properties.Name.like("%"+userName+"%")).build().list();
     }
 
     /**
@@ -61,8 +61,16 @@ public class DaoUtils {
      *
      * @return
      */
+    public static List<UserBean> queryAllNotFamilyUser() {
+        return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().where(UserBeanDao.Properties.FamilyID.isNull(),UserBeanDao.Properties.Name.notEq("admin")).list();
+    }
+    /**
+     * 查询所有用户
+     *
+     * @return
+     */
     public static List<UserBean> queryAllUser() {
-        return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().list();
+        return MyApp.getInstance().getDaoSession().getUserBeanDao().queryBuilder().where(UserBeanDao.Properties.Name.notEq("admin")).list();
     }
 
     /**

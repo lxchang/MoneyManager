@@ -80,7 +80,7 @@ public class LoginActivity extends BaseActivity {
                     Toast.makeText(LoginActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                List<UserBean> userBeans = DaoUtils.queryByName(account);
+                List<UserBean> userBeans = DaoUtils.queryByPhone(account);
                 if (userBeans != null && userBeans.size() > 0) {
                     int userType = userBeans.get(0).getUserType();
                     Long userId = userBeans.get(0).getId();

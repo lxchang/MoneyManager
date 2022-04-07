@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -24,6 +25,7 @@ import com.luxc.moneymanager.base.BaseActivity;
 import com.luxc.moneymanager.dialog.AbstractCommonDialog;
 import com.luxc.moneymanager.entity.UserBean;
 import com.luxc.moneymanager.utils.DaoUtils;
+import com.luxc.moneymanager.utils.LogUtils;
 import com.luxc.moneymanager.utils.ToastUtils;
 
 import java.util.List;
@@ -53,7 +55,7 @@ public class UserListActivity extends BaseActivity {
     protected void initView() {
         Long familyId = getIntent().getLongExtra("familyId",-1L);
         String familyName = getIntent().getStringExtra("familyName");
-        mainTitle.setText("邀请加入家庭");
+        mainTitle.setText("邀请成员");
         llRight.setVisibility(View.VISIBLE);
         userListAdapter = new UserListAdapter();
         rvUser.setAdapter(userListAdapter);
@@ -74,7 +76,7 @@ public class UserListActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(s)){
                     userBeans = DaoUtils.querySearchByName(s.toString());
                 }else{
-                    userBeans = DaoUtils.queryAllUser();
+                    userBeans = DaoUtils.queryAllNotFamilyUser();
                 }
 
                 userListAdapter.setNewInstance(userBeans);
@@ -103,13 +105,14 @@ public class UserListActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        userListAdapter.setNewInstance(DaoUtils.queryAllUser());
+        userListAdapter.setNewInstance(DaoUtils.queryAllNotFamilyUser());
     }
 
     @OnClick({R.id.ll_right,R.id.ll_back})
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.ll_back:
+                setResult(RESULT_OK);
                 finish();
                 break;
             case R.id.ll_right:
@@ -119,14 +122,13 @@ public class UserListActivity extends BaseActivity {
         }
     }
 
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK){
-            if (requestCode==ADD_NEW_USER_FLAG){
-                initData();
-            }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            setResult(RESULT_OK);
+            finish();
         }
+        return super.onKeyDown(keyCode, event);
     }
+
 }

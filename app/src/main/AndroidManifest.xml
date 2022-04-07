@@ -48,6 +48,7 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.ApplyListActivity" />
         <activity android:name=".activity.UserListActivity" />
+        <activity android:name=".activity.OtherUserInfoActivity" />
 
     </application>
 

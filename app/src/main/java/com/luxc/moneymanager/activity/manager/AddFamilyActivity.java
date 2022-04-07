@@ -2,6 +2,7 @@ package com.luxc.moneymanager.activity.manager;
 
 import android.text.TextUtils;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luxc.moneymanager.R;
@@ -20,6 +21,8 @@ import butterknife.OnClick;
 public class AddFamilyActivity extends BaseActivity {
     @BindView(R.id.et_family_name)
     EditText etFalimyName;
+    @BindView(R.id.main_title)
+    TextView mainTitle;
 
     private FamilyBean bean;
     private int type;
@@ -36,13 +39,17 @@ public class AddFamilyActivity extends BaseActivity {
 
         if (type == 1)
             etFalimyName.setText(bean.getFamilyName());
-
+        mainTitle.setText(type==1?"修改家庭信息":"创建家庭");
     }
 
     @Override
     protected void initData() {
     }
 
+    @OnClick(R.id.ll_back)
+    public void closeActivity(){
+        finish();
+    }
 
     @OnClick(R.id.btn_add)
     public void addNewUser() {
@@ -58,7 +65,7 @@ public class AddFamilyActivity extends BaseActivity {
             MyApp.getInstance().getDaoSession().update(bean);
 
             String userName = (String) SharedPreferenceUtils.get(AddFamilyActivity.this, "currentUser", "");
-            List<UserBean> userBeans = DaoUtils.queryByName(userName);
+            List<UserBean> userBeans = DaoUtils.queryByPhone(userName);
             if (userBeans != null && userBeans.size() > 0) {
                 UserBean userBean = userBeans.get(0);
                 userBean.setFamilyName(bean.getFamilyName());
@@ -77,7 +84,7 @@ public class AddFamilyActivity extends BaseActivity {
 
             MyApp.getInstance().getDaoSession().insert(familyBean);
 
-            List<UserBean> userBeans = DaoUtils.queryByName(userName);
+            List<UserBean> userBeans = DaoUtils.queryByPhone(userName);
             if (userBeans != null && userBeans.size() > 0) {
                 UserBean userBean = userBeans.get(0);
                 userBean.setFamilyID(familyBean.getFamilyId());

@@ -61,7 +61,7 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     protected void initData() {
         String currentName = (String) SharedPreferenceUtils.get(UserInfoActivity.this, "currentUser", "");
-        List<UserBean> userBeans = DaoUtils.queryByName(currentName);
+        List<UserBean> userBeans = DaoUtils.queryByPhone(currentName);
         if (userBeans != null && userBeans.size() > 0) {
             UserBean userBean = userBeans.get(0);
             userId = userBean.getId();
@@ -122,7 +122,7 @@ public class UserInfoActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == 1002) {
                 String currentName = (String) SharedPreferenceUtils.get(UserInfoActivity.this, "currentUser", "");
-                List<UserBean> userBeans = DaoUtils.queryByName(currentName);
+                List<UserBean> userBeans = DaoUtils.queryByPhone(currentName);
                 if (userBeans != null && userBeans.size() > 0) {
                     UserBean userBean = userBeans.get(0);
                     tvFamilyName.setText(userBean.getFamilyName());

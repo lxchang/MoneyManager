@@ -1,5 +1,8 @@
 package com.luxc.moneymanager.activity;
 
+import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -18,6 +21,9 @@ import com.luxc.moneymanager.base.BaseActivity;
 import com.luxc.moneymanager.entity.IncomePayRecordBean;
 import com.luxc.moneymanager.entity.TypeBean;
 import com.luxc.moneymanager.utils.DateTimeHelper;
+import com.luxc.moneymanager.utils.KeyboardUtil;
+import com.luxc.moneymanager.utils.SharedPreferenceUtils;
+import com.luxc.moneymanager.utils.ToastUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,20 +40,23 @@ import butterknife.OnClick;
 public class AddRecordActivity extends BaseActivity {
     @BindView(R.id.main_title)
     TextView mainTitle;
-    @BindView(R.id.et_name)
-    EditText etName;
+    @BindView(R.id.et_title)
+    EditText etTitle;
     @BindView(R.id.tv_type)
     TextView tvType;
     @BindView(R.id.et_money)
     EditText etMoney;
+    @BindView(R.id.et_description)
+    EditText etDescription;
     @BindView(R.id.tv_date)
     TextView startdateTv;
     //收支类型选择器
     private OptionsPickerView mTypePickerView;
-    private ArrayList<TypeBean> mTypeList;
     private ArrayList<String> mTypeNameList;
-    private String typeData = "{\"data\":[{\"id\":\"1\",\"typeName\":\"收入\"},{\"id\":\"0\",\"typeName\":\"支出\"}]}";
     private TimePickerView mStartDatePickerView;
+    private String name;
+    private Long userId;
+    private int type=0;
 
     @Override
     protected int getLayoutId() {
@@ -57,30 +66,35 @@ public class AddRecordActivity extends BaseActivity {
     @Override
     protected void initView() {
         mainTitle.setText("添加记录");
+
+        etMoney.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER){
+                    KeyboardUtil.hideKeyBoard(AddRecordActivity.this,v);
+                }
+                return false;
+            }
+        });
+        etTitle.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER){
+                    KeyboardUtil.hideKeyBoard(AddRecordActivity.this,v);
+                }
+                return false;
+            }
+        });
     }
 
     @Override
     protected void initData() {
-        mTypeList = new ArrayList<>();
-        try {
-            JSONObject jsonObject = new JSONObject(typeData);
-            JSONArray data = jsonObject.getJSONArray("data");
-            for (int i = 0; i < data.length(); i++) {
-                JSONObject jsonBean = data.getJSONObject(i);
-                TypeBean typeBean = new TypeBean();
-                typeBean.setId(jsonBean.getString("id"));
-                typeBean.setTypeName(jsonBean.getString("typeName"));
-                mTypeList.add(typeBean);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        name = (String) SharedPreferenceUtils.get(AddRecordActivity.this,"currentUser","");
+        userId = (Long) SharedPreferenceUtils.get(AddRecordActivity.this,"currentUserId",0L);
 
         mTypeNameList = new ArrayList<>();
-        for (TypeBean typeBean : mTypeList) {
-            mTypeNameList.add(typeBean.getTypeName());
-        }
+        mTypeNameList.add("收入");
+        mTypeNameList.add("支出");
 
         initTypeOptionPicker();
         initStartTimePicker();
@@ -94,18 +108,19 @@ public class AddRecordActivity extends BaseActivity {
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
                 String tx = mTypeNameList.get(options1);
+                type = options1+1;
                 tvType.setText(tx);
             }
         })
                 .setDecorView((RelativeLayout) findViewById(R.id.activity_rootview))//必须是RelativeLayout，不设置setDecorView的话，底部虚拟导航栏会显示在弹出的选择器区域
                 .setTitleText("选择收支类型")//标题文字
-                .setTitleSize(20)//标题文字大小
+                .setTitleSize(16)//标题文字大小
                 .setTitleColor(getResources().getColor(R.color.color_333))//标题文字颜色
                 .setCancelText("取消")//取消按钮文字
                 .setCancelColor(getResources().getColor(R.color.color_9c9c9c))//取消按钮文字颜色
                 .setSubmitText("确定")//确认按钮文字
                 .setSubmitColor(getResources().getColor(R.color.blue))//确定按钮文字颜色
-                .setContentTextSize(20)//滚轮文字大小
+                .setContentTextSize(16)//滚轮文字大小
                 .setTextColorCenter(getResources().getColor(R.color.black))//设置选中文本的颜色值
                 .setLineSpacingMultiplier(1.8f)//行间距
                 .setDividerColor(getResources().getColor(R.color.color_DBDBDB))//设置分割线的颜色
@@ -142,19 +157,38 @@ public class AddRecordActivity extends BaseActivity {
                 .setLabel("", "", "", "", "", "")
                 .isCenterLabel(false)//是否只显示中间选中项的label文字，false则每项item全部都带有label。
                 .setTitleText("收支日期")//标题文字
-                .setTitleSize(20)//标题文字大小
+                .setTitleSize(16)//标题文字大小
                 .setTitleColor(getResources().getColor(R.color.color_333))//标题文字颜色
                 .setCancelText("取消")//取消按钮文字
                 .setCancelColor(getResources().getColor(R.color.color_9c9c9c))//取消按钮文字颜色
                 .setSubmitText("确定")//确认按钮文字
                 .setSubmitColor(getResources().getColor(R.color.blue))//确定按钮文字颜色
-                .setContentTextSize(20)//滚轮文字大小
+                .setContentTextSize(16)//滚轮文字大小
                 .setTextColorCenter(getResources().getColor(R.color.black))//设置选中文本的颜色值
                 .setLineSpacingMultiplier(1.8f)//行间距
                 .setDividerColor(getResources().getColor(R.color.color_DBDBDB))//设置分割线的颜色
                 .setRangDate(startDate, endDate)//设置最小和最大日期
                 .setDate(selectedDate)//设置选中的日期
                 .build();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            View view=this.getCurrentFocus();
+            if (view!=null&&view instanceof EditText){
+                int[] l = {0, 0};
+                view.getLocationInWindow(l);
+                int left = l[0], top = l[1], bottom = top + view.getHeight(), right = left
+                        + view.getWidth();
+                if (event.getX() > left && event.getX() < right && event.getY() > top && event.getY() < bottom) {
+                    // 触摸的是IconCenterEditText控件，忽略它
+                } else {
+                    KeyboardUtil.closeKeyboard(this);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
     }
 
 
@@ -171,13 +205,37 @@ public class AddRecordActivity extends BaseActivity {
                 mStartDatePickerView.show();
                 break;
             case R.id.btn_add:
+                String title = etTitle.getText().toString().toString();
+                String money = etMoney.getText().toString().toString();
+                String description = etDescription.getText().toString().toString();
+                String inputDate = startdateTv.getText().toString();
+                if (TextUtils.isEmpty(title)){
+                    ToastUtils.showShort("请输入标题");
+                    return;
+                }
+                if (TextUtils.isEmpty(money)){
+                    ToastUtils.showShort("请输入金额");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(inputDate)){
+                    ToastUtils.showShort("请选择日期");
+                    return;
+                }
+                if (type==0){
+                    ToastUtils.showShort("请选择收支类型");
+                    return;
+                }
                 IncomePayRecordBean incomePayRecordBean = new IncomePayRecordBean();
-                incomePayRecordBean.setUser("小明爸");
-                incomePayRecordBean.setUserId(1L);
-                incomePayRecordBean.setType(0);
-                incomePayRecordBean.setMoney("5000");
-                incomePayRecordBean.setTime("2022-2-21");
+                incomePayRecordBean.setTitle(title);
+                incomePayRecordBean.setUser(name);
+                incomePayRecordBean.setUserId(userId);
+                incomePayRecordBean.setType(type);
+                incomePayRecordBean.setMoney(money);
+                incomePayRecordBean.setTime(inputDate);
+                incomePayRecordBean.setDescription(description);
                 MyApp.getInstance().getDaoSession().getIncomePayRecordBeanDao().insert(incomePayRecordBean);
+                ToastUtils.showShort("添加成功");
                 setResult(RESULT_OK);
                 finish();
                 break;

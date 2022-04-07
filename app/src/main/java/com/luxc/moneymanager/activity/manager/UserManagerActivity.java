@@ -7,9 +7,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.luxc.moneymanager.activity.OtherUserInfoActivity;
 import com.luxc.moneymanager.adapter.UserListAdapter;
 import com.luxc.moneymanager.application.MyApp;
 import com.luxc.moneymanager.base.BaseActivity;
@@ -43,9 +47,19 @@ public class UserManagerActivity extends BaseActivity {
     @Override
     protected void initView() {
         mainTitle.setText("用户管理");
-        llRight.setVisibility(View.VISIBLE);
+        llRight.setVisibility(View.GONE);
         userListAdapter = new UserListAdapter();
         rvUser.setAdapter(userListAdapter);
+
+        userListAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                UserBean userBean = userListAdapter.getData().get(position);
+                Intent intent = new Intent(UserManagerActivity.this, OtherUserInfoActivity.class);
+                intent.putExtra("data",userBean);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
